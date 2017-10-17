@@ -1,0 +1,15 @@
+/build
+/.eggs
+/dist
+*.pyc
+*.egg
+*.class
+.python-version
+/payabbhi.egg-info
+
+# Unit test / coverage reports
+.tox/
+.coverage
+coverage.xml
+htmlcov/
+examples/
