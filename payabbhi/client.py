@@ -19,7 +19,7 @@ for utility_name, utility_module in utility.__dict__.items():
 
 class Client(object):
 
-    VERSION = '1.0.1'
+    VERSION = '1.0.2'
 
     def __init__(self, access_id="", secret_key=""):
         self.session = requests.Session()
