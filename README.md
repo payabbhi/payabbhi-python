@@ -119,11 +119,11 @@ client.utility.verify_payment_signature({
 })
 ```
 
-### Verify a webhook signature
+### Verify webhook signature
 
 ```py
 # replay_interval is optional. (default value is 300 seconds)
-client.utility.verify_webhook_signature('<payload>','<actual_signature>','<secret>','<replay_interval>')
+client.utility.verify_webhook_signature('<payload>','<actual_signature>','<secret>',<replay_interval>)
 ```
 
 ## Tests

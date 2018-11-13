@@ -24,7 +24,7 @@ class Payment(APIResource):
 
         return super(Payment, self)._all(data, **kwargs)
 
-    def retrieve(self, payment_id, data=None, **kwargs):
+    def retrieve(self, payment_id, **kwargs):
         """"
         Retrieve payment for given Id
         Args:
@@ -32,10 +32,7 @@ class Payment(APIResource):
         Returns:
             Payment object with given payment Id
         """
-        if data is None:
-            data = {}
-
-        return super(Payment, self)._retrieve(payment_id, data, **kwargs)
+        return self._retrieve(payment_id, **kwargs)
 
     def refunds(self, payment_id, data=None, **kwargs):
         """"
@@ -93,7 +90,7 @@ class Payment(APIResource):
         url = self.instance_url(self.id) +'/refunds'
         refund = self._post(url, data, **kwargs)
 
-        refunded_payment = super(Payment, self)._retrieve(self.id, {})
+        refunded_payment = self._retrieve(self.id)
         self.__dict__.update(refunded_payment.__dict__)
 
         return refund

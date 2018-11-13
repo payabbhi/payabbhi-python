@@ -23,7 +23,7 @@ class Refund(APIResource):
 
         return super(Refund, self)._all(data, **kwargs)
 
-    def retrieve(self, refund_id, data=None, **kwargs):
+    def retrieve(self, refund_id, **kwargs):
         """"
         Retrieve Refund for given Id
         Args:
@@ -31,10 +31,7 @@ class Refund(APIResource):
         Returns:
             Refund object with given refund Id
         """
-        if data is None:
-            data = {}
-
-        return super(Refund, self)._retrieve(refund_id, data, **kwargs)
+        return super(Refund, self)._retrieve(refund_id, **kwargs)
 
     def create(self, payment_id, data=None, **kwargs):
         """"
