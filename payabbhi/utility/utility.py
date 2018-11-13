@@ -1,6 +1,7 @@
 import hashlib
 import hmac
 import sys
+import time
 
 from ..error import SignatureVerificationError
 
@@ -16,11 +17,24 @@ class Utility(object):
 
         msg = "{0}&{1}".format(payment_id, order_id)
 
-        self.verify_signature(payment_signature, msg)
+        return self.verify_signature(payment_signature, msg, str(self.client.secret_key))
 
 
-    def verify_signature(self, signature, body):
-        key = str(self.client.secret_key)
+    def verify_webhook_signature(self, parameters, actual_signature, secret, replay_interval=300):
+        entities = actual_signature.split(",")
+        payload_map = {}
+        for entity in entities:
+            key_value = entity.split("=")
+            payload_map[key_value[0].strip()] = key_value[1]
+
+        if payload_map.get("t") == None or payload_map.get("v1") == None or int(time.time()) - int(payload_map["t"]) > replay_interval:
+            raise SignatureVerificationError('Invalid signature passed')
+
+        canonical_string  = "{0}&{1}".format(parameters, payload_map["t"])
+        return self.verify_signature(payload_map["v1"],canonical_string, str(secret))
+
+
+    def verify_signature(self, signature, body, key):
 
         if sys.version_info[0] == 3:  # pragma: no cover
             key = bytes(key, 'utf-8')
@@ -34,3 +48,5 @@ class Utility(object):
 
         if not generated_signature == signature:
             raise SignatureVerificationError('Invalid signature passed')
+
+        return True
