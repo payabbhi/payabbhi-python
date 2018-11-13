@@ -18,5 +18,7 @@ __all__ = [
     'Plan',
     'Customer',
     'Subscription',
+    'Invoice',
+    'InvoiceItem',
     'List',
 ]
