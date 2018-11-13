@@ -62,6 +62,6 @@ class TestCustomer(unittest2.TestCase):
         url = '{0}/{1}'.format(self.customer_url, self.customer_id)
         responses.add(responses.PUT, url, status=200,
                       body=result, match_querystring=True)
-        response = self.client.customer.edit(self.customer_id, data={'email':'a@b.com', 'contact_no':'9999999999'})
+        response = self.client.customer.edit(self.customer_id, data={'email':'b@c.com', 'contact_no':'1234567890'})
         resp = json.loads(result)
         assert_customer(self, response, resp)
