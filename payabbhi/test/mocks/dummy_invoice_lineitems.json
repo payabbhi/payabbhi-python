@@ -1,0 +1,20 @@
+{
+    "total_count": 1,
+    "object": "list",
+    "data": [
+        {
+            "id": "item_FL3nHHB7i7Fpcj1J",
+            "object": "invoiceitem",
+            "name": "N2",
+            "description": "D2",
+            "amount": 200,
+            "currency": "INR",
+            "customer_id": "cust_2WmsQoSRZMWWkcZg",
+            "invoice_id": "dummy_invoice_id",
+            "subscription_id": "",
+            "quantity": 12,
+            "created_at": 1539074485,
+            "notes": null
+        }
+    ]
+}

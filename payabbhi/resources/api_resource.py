@@ -53,11 +53,17 @@ class APIResource(http_client.HTTPClient):
     def _all(self, data, **kwargs):
         return self._get(self.class_url(), data, **kwargs)
 
-    def _retrieve(self, _id, data, **kwargs):
-        return self._get(self.instance_url(_id), data, **kwargs)
+    def _retrieve(self, _id, **kwargs):
+        return self._get(self.instance_url(_id), {}, **kwargs)
 
     def _get(self, path, params, **kwargs):
         return self.request('GET', path, self.client, params=params, **kwargs)
 
     def _post(self, path, data, **kwargs):
         return self.request('POST', path, self.client, data=data, **kwargs)
+
+    def _put(self, path, data, **kwargs):
+        return self.request('PUT', path, self.client, data=data, **kwargs)
+
+    def _delete(self, _id, **kwargs):
+        return self.request('DELETE', self.instance_url(_id), self.client, data=None, **kwargs)

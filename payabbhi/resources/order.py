@@ -25,7 +25,7 @@ class Order(APIResource):
             data = {}
         return super(Order, self)._all(data, **kwargs)
 
-    def create(self, data=None, **kwargs):
+    def create(self, data, **kwargs):
         """"
         Create Order from given data
         Args:
@@ -38,12 +38,9 @@ class Order(APIResource):
         Returns:
             Order object containing data for created order
         """
-        if data is None:
-            data = {}
-
         return self._post(self.class_url(), data, **kwargs)
 
-    def retrieve(self, order_id, data=None, **kwargs):
+    def retrieve(self, order_id, **kwargs):
         """"
         Retrieve Order for given Id
         Args:
@@ -51,10 +48,7 @@ class Order(APIResource):
         Returns:
             Order object for given order Id
         """
-        if data is None:
-            data = {}
-
-        return super(Order, self)._retrieve(order_id, data, **kwargs)
+        return self._retrieve(order_id, **kwargs)
 
     def payments(self, data=None, **kwargs):
         """"

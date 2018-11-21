@@ -95,10 +95,14 @@ class HTTPClient(object):
             url, path = self.build_get_query(path, **options)
             headers = self.set_headers(client)
             return url, headers, None
-        if method == 'POST':
+        if method == 'POST' or method == 'PUT':
             url, body = self.build_post_query(path, **options)
             headers = self.set_headers(client)
             return url, headers, body
+        if method == 'DELETE':
+            url = payabbhi.api_base + path
+            headers = self.set_headers(client)
+            return url, headers, None
         else:
             msg = 'Unexpected Method: ' + method
             raise APIError(msg, None, "method")
@@ -150,6 +154,12 @@ class HTTPClient(object):
             'order': payabbhi.resources.Order,
             'payment': payabbhi.resources.Payment,
             'refund': payabbhi.resources.Refund,
+            'product': payabbhi.resources.Product,
+            'plan': payabbhi.resources.Plan,
+            'customer': payabbhi.resources.Customer,
+            'subscription': payabbhi.resources.Subscription,
+            'invoice': payabbhi.resources.Invoice,
+            'invoiceitem': payabbhi.resources.InvoiceItem,
             'list': payabbhi.resources.List,
         }
         klass_name = resp.get('object')
