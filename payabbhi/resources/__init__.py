@@ -7,6 +7,8 @@ from .customer   import Customer
 from .subscription   import Subscription
 from .invoice   import Invoice
 from .invoice_item   import InvoiceItem
+from .event  import Event
+from .transfer  import Transfer
 from .list   import List
 from .api_resource import APIResource
 
@@ -21,4 +23,6 @@ __all__ = [
     'Invoice',
     'InvoiceItem',
     'List',
+    'Event',
+    'Transfer'
 ]

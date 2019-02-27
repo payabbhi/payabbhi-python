@@ -150,6 +150,29 @@ def assert_invoice(self, actual, expected):
     self.assertEqual(actual.url, expected.get('url'))
     assert_list_of_invoice_items(self, actual.line_items, expected.get('line_items'))
 
+def assert_event(self, actual, expected):
+    self.assertEqual(isinstance(actual, payabbhi.resources.Event), True)
+    self.assertEqual(actual.id, expected.get('id'))
+    self.assertEqual(actual.object, expected.get('object'))
+    self.assertEqual(actual.type, expected.get('type'))
+    self.assertEqual(actual.created_at, expected.get('created_at'))
+    self.assertEqual(actual.environment, expected.get('environment'))
+    self.assertEqual(actual.data, expected.get('data'))
+
+def assert_transfer(self, actual, expected):
+    self.assertEqual(isinstance(actual, payabbhi.resources.Transfer), True)
+    self.assertEqual(actual.id, expected.get('id'))
+    self.assertEqual(actual.object, expected.get('object'))
+    self.assertEqual(actual.description, expected.get('description'))
+    self.assertEqual(actual.source_id, expected.get('source_id'))
+    self.assertEqual(actual.recipient_id, expected.get('recipient_id'))
+    self.assertEqual(actual.amount, expected.get('amount'))
+    self.assertEqual(actual.currency, expected.get('currency'))
+    self.assertEqual(actual.fees, expected.get('fees'))
+    self.assertEqual(actual.gst, expected.get('gst'))
+    self.assertEqual(actual.notes, expected.get('notes'))
+    self.assertEqual(actual.created_at, expected.get('created_at'))
+
 
 def assert_list_of_orders(self, actual, expected):
     self.assertEqual(isinstance(actual, payabbhi.resources.List), True)
@@ -213,3 +236,17 @@ def assert_list_of_invoices(self, actual, expected):
     self.assertEqual(actual.object, expected.get('object'))
     for (invoice_actual, invoice_expected) in zip(actual.data, expected.get('data')):
         assert_invoice(self, invoice_actual, invoice_expected)
+
+def assert_list_of_events(self, actual, expected):
+    self.assertEqual(isinstance(actual, payabbhi.resources.List), True)
+    self.assertEqual(actual.total_count, expected.get('total_count'))
+    self.assertEqual(actual.object, expected.get('object'))
+    for (event_actual, event_expected) in zip(actual.data, expected.get('data')):
+        assert_event(self, event_actual, event_expected)
+
+def assert_list_of_transfers(self, actual, expected):
+    self.assertEqual(isinstance(actual, payabbhi.resources.List), True)
+    self.assertEqual(actual.total_count, expected.get('total_count'))
+    self.assertEqual(actual.object, expected.get('object'))
+    for (transfer_actual, transfer_expected) in zip(actual.data, expected.get('data')):
+        assert_transfer(self, transfer_actual, transfer_expected)

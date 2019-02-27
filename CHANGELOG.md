@@ -2,9 +2,9 @@
 
 Changelog for payabbhi-python.
 
-## [1.0.3] - 2018-11-13
+## [1.0.3] - 2019-02-27
 ### Added
-- Adding library calls for billing APIs
+- Support for Billing, Event and Outflow APIs
 
 ## [1.0.2] - 2018-11-13
 ### Added

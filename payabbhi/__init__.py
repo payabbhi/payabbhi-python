@@ -8,6 +8,8 @@ from .resources import Subscription
 from .resources import Invoice
 from .resources import InvoiceItem
 from .resources import List
+from .resources import Event
+from .resources import Transfer
 
 from .utility import Utility
 
@@ -34,6 +36,8 @@ __all__ = [
     'Subscription',
     'Invoice',
     'InvoiceItem',
+    'Event',
+    'Transfer',
     'List',
     'Utility'
 ]

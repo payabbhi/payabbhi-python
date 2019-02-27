@@ -38,7 +38,7 @@ class Payment(APIResource):
         """"
         Retrieve Refunds for given payment Id
         Args:
-            payment_id:
+            payment_id: Payment identifier for which refunds has to be retrieved
             data : Dictionary having keys using which refund list will be filtered
                 count:           Count of refunds to be retrieved
                 skip:            Number of refunds to be skipped
@@ -94,3 +94,22 @@ class Payment(APIResource):
         self.__dict__.update(refunded_payment.__dict__)
 
         return refund
+
+    def transfers(self, payment_id, data=None, **kwargs):
+        """"
+        Retrieve Transfers for given payment Id
+        Args:
+            payment_id: Payment identifier for which transfers has to be retrieved
+            data : Dictionary having keys using which refund list will be filtered
+                count:           Count of transfers to be retrieved
+                skip:            Number of transfers to be skipped
+                to:              Transfer list till this timestamp will be retrieved
+                from:            Transfer list from this timestamp will be retrieved
+        Returns:
+            Transfer list for a payment object
+        """
+        if data is None:
+            data = {}
+
+        url = "{0}/transfers".format(self.instance_url(payment_id))
+        return self._get(url, data, **kwargs)
