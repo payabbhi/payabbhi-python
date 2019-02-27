@@ -4,7 +4,7 @@ import responses
 import payabbhi
 
 import unittest2
-from .helpers import mock_file, assert_payment, assert_list_of_refunds, assert_refund, assert_list_of_payments
+from .helpers import mock_file, assert_payment, assert_list_of_refunds, assert_refund, assert_list_of_payments, assert_list_of_transfers
 
 class TestPayment(unittest2.TestCase):
 
@@ -117,3 +117,24 @@ class TestPayment(unittest2.TestCase):
             self.assertTrue('Object Id not set' in error.exception.description)
             self.assertIsNone(error.exception.http_status)
             self.assertIsNone(error.exception.field)
+
+    @responses.activate
+    def test_payment_retrieve_transfers(self):
+        result = mock_file('dummy_transfer_collection')
+        url = '{0}/{1}/transfers'.format(self.payment_url, self.payment_id)
+        responses.add(responses.GET, url, status=200,
+                      body=result, match_querystring=True)
+        response = self.client.payment.transfers(self.payment_id)
+        resp = json.loads(result)
+        assert_list_of_transfers(self, response, resp)
+
+    @responses.activate
+    def test_payment_retrieves_transfers_with_options(self):
+        result = mock_file('dummy_transfer_collection')
+        count = 1
+        url = '{0}/{1}/transfers?count={2}'.format(self.payment_url, self.payment_id, count)
+        responses.add(responses.GET, url, status=200,
+                      body=result, match_querystring=True)
+        response = self.client.payment.transfers(self.payment_id, data={'count':1})
+        resp = json.loads(result)
+        assert_list_of_transfers(self, response, resp)
