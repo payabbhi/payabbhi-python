@@ -3,7 +3,7 @@
     "object": "list",
     "data": [
         {
-            "id": "plan_P7wNUwTdGC2u2n2I",
+            "id": "dummy_plan_id",
             "object": "plan",
             "product_id": "prod_wJ6DyX5Bgg2LqAqt",
             "name": "",
@@ -15,7 +15,7 @@
             "created_at": 1539158721
         },
         {
-            "id": "plan_wUHIpy3ZOC7DzOvw",
+            "id": "dummy_plan_id",
             "object": "plan",
             "product_id": "prod_wJ6DyX5Bgg2LqAqt",
             "name": "",

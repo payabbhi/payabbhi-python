@@ -5,10 +5,9 @@
     "description": "",
     "amount": 200,
     "currency": "INR",
-    "customer_id": "cust_2WmsQoSRZMWWkcZg",
-    "invoice_id": "",
-    "subscription_id": "",
+    "customer_id": "dummy_customer_id",
     "quantity": 1,
     "created_at": 1539174367,
-    "notes": null
+    "notes": null,
+    "deleted_at": 0
 }

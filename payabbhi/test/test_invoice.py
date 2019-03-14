@@ -1,16 +1,20 @@
-import sys
 import json
-import responses
-import payabbhi
+import sys
 
+import payabbhi
+import responses
 import unittest2
-from .helpers import mock_file, assert_list_of_invoices, assert_invoice, assert_list_of_invoice_items, assert_list_of_payments
+
+from .helpers import (assert_invoice, assert_list_of_invoice_items,
+                      assert_list_of_invoices, assert_list_of_payments,
+                      mock_file)
 
 
 class TestInvoice(unittest2.TestCase):
 
     def setUp(self):
-        self.client = payabbhi.Client(access_id='access_id', secret_key='secret_key')
+        self.client = payabbhi.Client(
+            access_id='access_id', secret_key='secret_key')
         payabbhi.api_base = 'https://payabbhi.com'
         self.invoice_id = 'dummy_invoice_id'
         self.invoice_url = payabbhi.api_base + '/api/v1/invoices'
@@ -32,7 +36,7 @@ class TestInvoice(unittest2.TestCase):
         url = '{0}?count={1}&skip={2}'.format(self.invoice_url, count, skip)
         responses.add(responses.GET, url, status=200,
                       body=result, match_querystring=True)
-        response = self.client.invoice.all(data={'count': count, 'skip':skip})
+        response = self.client.invoice.all(data={'count': count, 'skip': skip})
         resp = json.loads(result)
         assert_list_of_invoices(self, response, resp)
 
@@ -52,17 +56,18 @@ class TestInvoice(unittest2.TestCase):
         url = self.invoice_url
         responses.add(responses.POST, url, status=200,
                       body=result, match_querystring=True)
-        response = self.client.invoice.create(data={'customer_id':'cust_2WmsQoSRZMWWkcZg', 'invoice_no':'123123123123','due_date':1549176945,'currency':'INR', 'description':'TestInvoice','notes':{"mode":"test"},'line_items':[{"id":"item_jYGaYf14SeZ13DkJ"}]})
+        response = self.client.invoice.create(data={'customer_id': 'dummy_customer_id', 'invoice_no': '123123123123', 'due_date': 1549176945,
+                                                    'currency': 'INR', 'description': 'TestInvoice', 'notes': {"mode": "test"}, 'line_items': [{"id": "dummy_item_id"}]})
         resp = json.loads(result)
         assert_invoice(self, response, resp)
 
     @responses.activate
-    def test_invoice_cancel(self):
-        result = mock_file('dummy_invoice_cancel')
-        url = '{0}/{1}/cancel'.format(self.invoice_url, self.invoice_id)
+    def test_invoice_void(self):
+        result = mock_file('dummy_invoice_void')
+        url = '{0}/{1}/void'.format(self.invoice_url, self.invoice_id)
         responses.add(responses.POST, url, status=200,
                       body=result, match_querystring=True)
-        response = self.client.invoice.cancel(self.invoice_id)
+        response = self.client.invoice.void(self.invoice_id)
         resp = json.loads(result)
         assert_invoice(self, response, resp)
 

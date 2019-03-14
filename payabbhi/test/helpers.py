@@ -107,8 +107,9 @@ def assert_subscription(self, actual, expected):
     self.assertEqual(actual.billing_cycle_count, expected.get('billing_cycle_count'))
     self.assertEqual(actual.paid_count, expected.get('paid_count'))
     self.assertEqual(actual.cancel_at_period_end, expected.get('cancel_at_period_end'))
-    self.assertEqual(actual.due_by_days, expected.get('due_by_days'))
+    self.assertEqual(actual.due_at, expected.get('due_at'))
     self.assertEqual(actual.trial_end_at, expected.get('trial_end_at'))
+    self.assertEqual(actual.trial_duration, expected.get('trial_duration'))
     self.assertEqual(actual.status, expected.get('status'))
     self.assertEqual(actual.current_start_at, expected.get('current_start_at'))
     self.assertEqual(actual.current_end_at, expected.get('current_end_at'))
@@ -125,11 +126,10 @@ def assert_invoice_item(self, actual, expected):
     self.assertEqual(actual.amount, expected.get('amount'))
     self.assertEqual(actual.currency, expected.get('currency'))
     self.assertEqual(actual.customer_id, expected.get('customer_id'))
-    self.assertEqual(actual.invoice_id, expected.get('invoice_id'))
-    self.assertEqual(actual.subscription_id, expected.get('subscription_id'))
     self.assertEqual(actual.quantity, expected.get('quantity'))
     self.assertEqual(actual.created_at, expected.get('created_at'))
     self.assertEqual(actual.notes, expected.get('notes'))
+    self.assertEqual(actual.deleted_at, expected.get('deleted_at'))
 
 def assert_invoice(self, actual, expected):
     self.assertEqual(isinstance(actual, payabbhi.resources.Invoice), True)

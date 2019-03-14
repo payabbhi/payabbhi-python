@@ -36,11 +36,12 @@ class Subscription(APIResource):
                 billing_cycle_count: Total no. of billing cycles. This represents how long the subscription will run.
                 customer_id: The unique identifier of the Customer who is subscribing to the plan.
                 customer_notification_by: Indicates who is responsible for notification to the customers for important subscription life cycle events.
-                trial_end_at: Timestamp at which the trial for the subscription should end. Measured in seconds since the Unix epoch.
+                trial_duration: Duration of the trial period in days
                 quantity: The quantity of the plan, which the customer is subscribing to. Ex : 5 users are subscribing to the plan.
-                billing_method: Billing mode of the Subscription. the value can be either automatic or manual.
+                billing_method: Billing mode of the Subscription. the value can be either recurring or manual.
                 due_by_days: No. of days by which the invoices associated with the subscription should be paid starting from the Invoice Issue date. This is applicable only when billing_method is manual.
                 notes: key value pair as notes
+                upfront_items: List of item objects to be included as upfront charges or set up fees of the subscription.
         Returns:
             Subscription object containing data for created subscription
         """

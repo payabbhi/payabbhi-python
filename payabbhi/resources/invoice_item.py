@@ -33,6 +33,7 @@ class InvoiceItem(APIResource):
                 amount: Amount of the invoice item
                 currency: Currency of the invoice item amoount
                 invoice_id: The unique identifier of the invoice to which this invoice item to be added
+                subscription_id: The unique identifier of the subscription to which this invoice item is to be added as an addon
                 description: Description of the invoice item
                 quantity: Quantity of the invoice item
                 notes: key value pair as notes
@@ -50,6 +51,16 @@ class InvoiceItem(APIResource):
             Invoice Item object for given invoice item Id
         """
         return self._retrieve(invoice_item_id, **kwargs)
+
+    def invoices(self, invoice_item_id, **kwargs):
+        """"
+        Retrieve Invoices where the invoice item with invoice_item_id is attached
+        Returns:
+            List of Invoice objects
+        """
+
+        url = "{0}/invoices".format(self.instance_url(invoice_item_id))
+        return self._get(url, {}, **kwargs)
 
     def delete(self, invoice_item_id, **kwargs):
         """"

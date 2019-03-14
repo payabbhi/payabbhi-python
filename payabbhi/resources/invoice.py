@@ -19,7 +19,7 @@ class Invoice(APIResource):
                 billing_method:     A filter on the invoice list based on the billing_method field
                 due_date_from:      A filter criterion based on the due_date field of the invoice object
                 due_date_to:        A filter criterion based on the due_date field of the invoice object
-                customer_id:        A filter on the invoice list based on the customer_id field
+                email:              A filter on the invoice list based on the customer's email field
                 subscription_id:    A filter on the invoice list based on the subscription_id field
         Returns:
             List of Invoice objects
@@ -58,18 +58,18 @@ class Invoice(APIResource):
         """
         return self._retrieve(invoice_id, **kwargs)
 
-    def cancel(self, invoice_id, data=None, **kwargs):
+    def void(self, invoice_id, data=None, **kwargs):
         """"
-        Cancel Invoice for given Id
+        Mark Invoice as Void for a given Id
         Args:
-            invoice_id : Id for which Invoice object is to be cancelled
+            invoice_id : The unique identifier of the invoice which needs to be voided
         Returns:
-            Invoice object corresponding to the invoice Id after successful cancellation
+            Returns the invoice object if the invoice is voided successfully
         """
         if data is None:
             data = {}
 
-        url = "{0}/cancel".format(self.instance_url(invoice_id))
+        url = "{0}/void".format(self.instance_url(invoice_id))
         return self._post(url, data, **kwargs)
 
     def line_items(self, invoice_id, data=None, **kwargs):

@@ -5,10 +5,9 @@
     "description": "D3",
     "amount": 300,
     "currency": "INR",
-    "customer_id": "cust_2WmsQoSRZMWWkcZg",
-    "invoice_id": "invt_UZqFoPLamaZqLFkZ",
-    "subscription_id": "",
+    "customer_id": "dummy_customer_id",
     "quantity": 12,
     "created_at": 1539074485,
-    "notes": null
+    "notes": null,
+    "deleted_at": 1539119111
 }
