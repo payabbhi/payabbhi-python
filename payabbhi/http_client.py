@@ -29,7 +29,7 @@ class HTTPClient(object):
         url_parts[4] = urlencode(query)
         encoded_url = urlparse.urlunparse(url_parts)
         if url_parts[4]:
-            path = path+'?'+url_parts[4]
+            path = path + '?' + url_parts[4]
         return encoded_url, path
 
     def build_post_query(self, path, **options):
@@ -134,18 +134,20 @@ class HTTPClient(object):
                 raise APIError(msg, response.status_code)
 
     def request(self, method, path, client, **options):
-        url, headers, body = self.handle_http_method(method, path, client, **options)
+        url, headers, body = self.handle_http_method(
+            method, path, client, **options)
         try:
-            response = getattr(requests.Session(), method.lower())(url,
-                                                                   auth=(client.access_id, client.secret_key),
-                                                                   headers=headers,
-                                                                   data=body)
+            response = getattr(requests.Session(), method.lower())(
+                url, auth=(client.access_id,
+                           client.secret_key),
+                headers=headers, data=body)
         except Exception as exception:
             raise APIConnectionError(str(exception))
         try:
             json_resp = response.json()
         except Exception:
-            raise APIError("Something did not work as expected on our side", 500)
+            raise APIError(
+                "Something did not work as expected on our side", 500)
         self.handle_http_code(response)
         return self.convert_to_object(json_resp, client)
 
