@@ -48,21 +48,20 @@ class Subscription(APIResource):
         return self._post(self.class_url(), data, **kwargs)
 
     def cancel(self, subscription_id, data=None, **kwargs):
-       """"
-       Cancels existing Subscription
-       Args:
-            subscription_id: The identifier of the subscription which needs to be cancelled.
-            data : Dictionary having keys using which subscription has to be cancelled
-                at_billing_cycle_end: The flag which determines if the Subscription to be cancelled immediately or at the end of the current billing cycle.
-       Returns:
-           Subscription object containing data for cancelled subscription
-       """
-       if data is None:
-           data = {}
+        """"
+        Cancels existing Subscription
+        Args:
+             subscription_id: The identifier of the subscription which needs to be cancelled.
+             data : Dictionary having keys using which subscription has to be cancelled
+                 at_billing_cycle_end: The flag which determines if the Subscription to be cancelled immediately or at the end of the current billing cycle.
+        Returns:
+            Subscription object containing data for cancelled subscription
+        """
+        if data is None:
+            data = {}
 
-       url = "{0}/cancel".format(self.instance_url(subscription_id))
-       return self._post(url, data, **kwargs)
-
+        url = "{0}/cancel".format(self.instance_url(subscription_id))
+        return self._post(url, data, **kwargs)
 
     def retrieve(self, subscription_id, **kwargs):
         """"
