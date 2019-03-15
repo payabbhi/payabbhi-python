@@ -1,4 +1,3 @@
-from ..error import InvalidRequestError
 from .api_resource import APIResource
 
 
