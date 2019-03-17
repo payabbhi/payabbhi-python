@@ -51,15 +51,17 @@ class InvoiceItem(APIResource):
         """
         return self._retrieve(invoice_item_id, **kwargs)
 
-    def invoices(self, invoice_item_id, **kwargs):
+    def invoices(self, invoice_item_id, data=None, **kwargs):
         """"
         Retrieve Invoices where the invoice item with invoice_item_id is attached
         Returns:
             List of Invoice objects
         """
+        if data is None:
+            data = {}
 
         url = "{0}/invoices".format(self.instance_url(invoice_item_id))
-        return self._get(url, {}, **kwargs)
+        return self._get(url, data, **kwargs)
 
     def delete(self, invoice_item_id, **kwargs):
         """"
