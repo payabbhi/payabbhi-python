@@ -6,7 +6,7 @@ Make sure you have signed up for your [Payabbhi Account](https://payabbhi.com/do
 
 ## Requirements
 
-Python 2.6 and later.
+Python 2.7 and later.
 
 ## pip
 
@@ -83,7 +83,7 @@ client.utility.verify_webhook_signature('<payload>','<actual_signature>','<secre
 ## Tests
 
 Install dependencies to run unittests
-  - [unittest2](https://docs.python.org/2/library/unittest2.html)
+  - [unittest2](https://pypi.org/project/unittest2/)
   - [responses](https://pypi.python.org/pypi/responses)
 
 ```bash
