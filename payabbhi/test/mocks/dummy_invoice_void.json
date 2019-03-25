@@ -1,0 +1,39 @@
+{
+    "id": "dummy_invoice_id",
+    "object": "invoice",
+    "amount": 500,
+    "billing_method": "recurring",
+    "customer_id": "dummy_customer_id",
+    "currency": "INR",
+    "created_at": 1539179543,
+    "description": "TestInvoice",
+    "due_date": 1549176945,
+    "line_items": {
+      "total_count": 1,
+      "object": "list",
+      "data": [
+        {
+            "id": "dummy_item_id",
+            "object": "invoiceitem",
+            "name": "Line Item",
+            "description": "",
+            "amount": 100,
+            "currency": "INR",
+            "customer_id": "dummy_customer_id",
+            "quantity": 1,
+            "created_at": 1539171807,
+            "notes": null,
+            "deleted_at": 0
+        }
+      ]
+    },
+    "notes": {
+        "mode": "test"
+    },
+    "notify_by": "email",
+    "payment_attempt": 0,
+    "invoice_no": "123123123123",
+    "status": "void",
+    "subscription_id": "",
+    "url": "https://payabbhi.com/zro4qjer"
+}

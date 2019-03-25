@@ -1,6 +1,7 @@
 /build
 /.eggs
 /dist
+test.py
 *.pyc
 *.egg
 *.class
@@ -13,3 +14,4 @@
 coverage.xml
 htmlcov/
 examples/
+.pytest_cache/

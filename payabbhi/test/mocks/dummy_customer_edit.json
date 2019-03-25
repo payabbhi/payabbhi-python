@@ -1,0 +1,17 @@
+{
+    "id": "dummy_customer_id",
+    "object": "customer",
+    "name": "",
+    "email": "b@c.com",
+    "contact_no": "1234567890",
+    "billing_address": null,
+    "shipping_address": null,
+    "gstin": "",
+    "notes": null,
+    "subscriptions": {
+        "total_count": 0,
+        "object": "list",
+        "data": []
+    },
+    "created_at": 1539002874
+}
