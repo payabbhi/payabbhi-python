@@ -29,7 +29,7 @@ class HTTPClient(object):
         url_parts[4] = urlencode(query)
         encoded_url = urlparse.urlunparse(url_parts)
         if url_parts[4]:
-            path = path+'?'+url_parts[4]
+            path = path + '?' + url_parts[4]
         return encoded_url, path
 
     def build_post_query(self, path, **options):
@@ -95,10 +95,14 @@ class HTTPClient(object):
             url, path = self.build_get_query(path, **options)
             headers = self.set_headers(client)
             return url, headers, None
-        if method == 'POST':
+        if method == 'POST' or method == 'PUT':
             url, body = self.build_post_query(path, **options)
             headers = self.set_headers(client)
             return url, headers, body
+        if method == 'DELETE':
+            url = payabbhi.api_base + path
+            headers = self.set_headers(client)
+            return url, headers, None
         else:
             msg = 'Unexpected Method: ' + method
             raise APIError(msg, None, "method")
@@ -130,18 +134,20 @@ class HTTPClient(object):
                 raise APIError(msg, response.status_code)
 
     def request(self, method, path, client, **options):
-        url, headers, body = self.handle_http_method(method, path, client, **options)
+        url, headers, body = self.handle_http_method(
+            method, path, client, **options)
         try:
-            response = getattr(requests.Session(), method.lower())(url,
-                                                                   auth=(client.access_id, client.secret_key),
-                                                                   headers=headers,
-                                                                   data=body)
+            response = getattr(requests.Session(), method.lower())(
+                url, auth=(client.access_id,
+                           client.secret_key),
+                headers=headers, data=body)
         except Exception as exception:
             raise APIConnectionError(str(exception))
         try:
             json_resp = response.json()
         except Exception:
-            raise APIError("Something did not work as expected on our side", 500)
+            raise APIError(
+                "Something did not work as expected on our side", 500)
         self.handle_http_code(response)
         return self.convert_to_object(json_resp, client)
 
@@ -150,7 +156,15 @@ class HTTPClient(object):
             'order': payabbhi.resources.Order,
             'payment': payabbhi.resources.Payment,
             'refund': payabbhi.resources.Refund,
-            'list': payabbhi.resources.List,
+            'product': payabbhi.resources.Product,
+            'plan': payabbhi.resources.Plan,
+            'customer': payabbhi.resources.Customer,
+            'subscription': payabbhi.resources.Subscription,
+            'invoice': payabbhi.resources.Invoice,
+            'invoiceitem': payabbhi.resources.InvoiceItem,
+            'event': payabbhi.resources.Event,
+            'transfer': payabbhi.resources.Transfer,
+            'list': payabbhi.resources.List
         }
         klass_name = resp.get('object')
         if not klass_name:

@@ -6,7 +6,7 @@ Make sure you have signed up for your [Payabbhi Account](https://payabbhi.com/do
 
 ## Requirements
 
-Python 2.6 and later.
+Python 2.7 and later.
 
 ## pip
 
@@ -58,55 +58,9 @@ client.set_app_info(app_name='app_name',
 ### Orders
 ```py
 # Create order
-created_order = client.order.create(data={'amount':100,
-                                  'merchant_order_id': '<merchant_order_id>',
-                                  'currency':'INR',
-                                  'payment_auto_capture':False})
-
-# Retrieve a particular order object
-order = client.order.retrieve('<order_id>')
-
-# Retrieve a set of order objects based on given filter params
-list_of_orders = client.order.all(data={'count': 5})
-
-# Retrieve a set of payments for a given order
-payments = retrieved_order.payments()
-```
-
-### Payments
-
-```py
-# Retrieve all payments
-payments = client.payment.all(data={'count': 10})
-
-# Retrieve a particular payment object
-payment = client.payment.retrieve('<payment_id>')
-
-# Capture a payment
-payment = payment.capture()
-
-# Refund a payment
-refund = payment.refund(data={'amount':100,
-                    'currency':'INR'})
-
-# Retrieve a set of refund objects for a given payment with optional filter params
-refunds = client.payment.refunds('<payment_id>', data={'count': 2})
-```
-
-### Refunds
-
-```py
-# Create a refund
-refund = client.refund.create('<payment_id>')
-
-# Create a partial refund
-refund = client.refund.create('<payment_id>', data={'amount':100})
-
-# Retrieve a set of refunds with the given filter params
-refunds = client.refund.all(data={'count': 2})
-
-# Retrieve a particular refund object
-refund = client.refund.retrieve('<refund_id>')
+order = client.order.create(data={'amount': 100,
+                                  'merchant_order_id': 'ORD_001',
+                                  'currency':'INR'})
 ```
 
 ### Verify a payment signature
@@ -129,7 +83,7 @@ client.utility.verify_webhook_signature('<payload>','<actual_signature>','<secre
 ## Tests
 
 Install dependencies to run unittests
-  - [unittest2](https://docs.python.org/2/library/unittest2.html)
+  - [unittest2](https://pypi.org/project/unittest2/)
   - [responses](https://pypi.python.org/pypi/responses)
 
 ```bash

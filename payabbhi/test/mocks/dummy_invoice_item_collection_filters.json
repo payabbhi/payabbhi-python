@@ -1,0 +1,32 @@
+{
+    "total_count": 5,
+    "object": "list",
+    "data": [
+        {
+            "id": "dummy_item_id",
+            "object": "invoiceitem",
+            "name": "Line Item",
+            "description": "",
+            "amount": 200,
+            "currency": "INR",
+            "customer_id": "dummy_customer_id",
+            "quantity": 1,
+            "created_at": 1539174368,
+            "notes": null,
+            "deleted_at": 0
+        },
+        {
+            "id": "dummy_item_id",
+            "object": "invoiceitem",
+            "name": "Line Item",
+            "description": "",
+            "amount": 100,
+            "currency": "INR",
+            "customer_id": "dummy_customer_id",
+            "quantity": 1,
+            "created_at": 1539171807,
+            "notes": null,
+            "deleted_at": 0
+        }
+    ]
+}
