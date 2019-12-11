@@ -100,11 +100,6 @@ class Payment(APIResource):
         Retrieve Transfers for given payment Id
         Args:
             payment_id: Payment identifier for which transfers has to be retrieved
-            data : Dictionary having keys using which refund list will be filtered
-                count:           Count of transfers to be retrieved
-                skip:            Number of transfers to be skipped
-                to:              Transfer list till this timestamp will be retrieved
-                from:            Transfer list from this timestamp will be retrieved
         Returns:
             Transfer list for a payment object
         """
@@ -113,3 +108,21 @@ class Payment(APIResource):
 
         url = "{0}/transfers".format(self.instance_url(payment_id))
         return self._get(url, data, **kwargs)
+
+    def transfer(self, data, **kwargs):
+        """"
+        Create Transfer from given data
+        Args:
+            data : Dictionary having keys using which transfer has to be created
+                transfers: List of transfers to be created with following details
+                    beneficiary_id: The identifier of beneficiary of this transfer
+                    description: Description of the Transfer.
+                    amount:  Amount of Transfer
+                    currency: Currency used in Transfer
+                    notes: key value pair as notes
+        Returns:
+            Transfer object containing data for created transfers
+        """
+
+        url = self.instance_url(self.id) + '/transfers'
+        return self._post(url, data, **kwargs)

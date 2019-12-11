@@ -10,6 +10,7 @@ from .resources import InvoiceItem
 from .resources import List
 from .resources import Event
 from .resources import Transfer
+from .resources import BeneficiaryAccount
 
 from .utility import Utility
 
@@ -38,6 +39,7 @@ __all__ = [
     'InvoiceItem',
     'Event',
     'Transfer',
+    'BeneficiaryAccount',
     'List',
     'Utility'
 ]

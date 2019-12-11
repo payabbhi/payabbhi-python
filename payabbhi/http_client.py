@@ -164,9 +164,11 @@ class HTTPClient(object):
             'invoiceitem': payabbhi.resources.InvoiceItem,
             'event': payabbhi.resources.Event,
             'transfer': payabbhi.resources.Transfer,
-            'list': payabbhi.resources.List
+            'list': payabbhi.resources.List,
+            'beneficiary_account': payabbhi.resources.BeneficiaryAccount
         }
         klass_name = resp.get('object')
+
         if not klass_name:
             return resp
         klass = types.get(klass_name)

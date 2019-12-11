@@ -22,14 +22,14 @@ class Transfer(APIResource):
             data = {}
         return super(Transfer, self)._all(data, **kwargs)
 
-    def create(self, source_id, data, **kwargs):
+    def create(self, data, **kwargs):
         """"
         Create Transfer from given data
         Args:
-            source_id: The identifier of the source for which transfers need to be created.
             data : Dictionary having keys using which transfer has to be created
+                source_id: The identifier of the source for which transfers need to be created.
                 transfers: List of transfers to be created with following details
-                    recipient_id: The identifier of recipient of this transfer
+                    beneficiary_id: The identifier of recipient of this transfer
                     description: Description of the Transfer.
                     amount:  Amount of Transfer
                     currency: Currency used in Transfer
@@ -37,8 +37,7 @@ class Transfer(APIResource):
         Returns:
             Transfer object containing data for created transfers
         """
-        url = '/api/v1/payments/' + source_id + '/transfers'
-        return self._post(url, data, **kwargs)
+        return self._post(self.class_url(), data, **kwargs)
 
     def retrieve(self, transfer_id, **kwargs):
         """"

@@ -45,6 +45,7 @@ class APIResource(http_client.HTTPClient):
 
     def instance_url(self, instance_id):
         class_url = self.class_url()
+
         if sys.version_info[0] >= 3:
             return class_url + '/' + urlparse.quote(instance_id.encode('utf8'))
 
