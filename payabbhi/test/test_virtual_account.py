@@ -52,7 +52,7 @@ class TestVirtualAccount(unittest2.TestCase):
         url = self.virtual_account_url
         responses.add(responses.POST, url, status=200,
                       body=result, match_querystring=True)
-        response = self.client.virtual_account.create(data={"email":"test@example.com","contact_no":"9999999999","description":"virtual_payment","collection_methods":["bank_account"],"notification_method":"both","customer_notification_by":"platform","notes":{"channel":"virtual_account"}})
+        response = self.client.virtual_account.create(data={"email":"test@example.com","contact_no":"9999999999","description":"virtual_payment","collection_methods": {"bank_account": ""},"notification_method":"both","customer_notification_by":"platform","notes":{"channel":"virtual_account"}})
         resp = json.loads(result)
         assert_virtual_account(self, response, resp)
 

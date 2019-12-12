@@ -173,6 +173,7 @@ class HTTPClient(object):
                                                      # never fails during recursive search
             'bank_account': payabbhi.resources.EmptyClass,
             'bank_account_payment': payabbhi.resources.EmptyClass,
+            'upi': payabbhi.resources.EmptyClass,
         }
 
         klass_name = resp.get('object')
