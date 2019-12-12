@@ -52,21 +52,6 @@ class VirtualAccount(APIResource):
         """
         return self._post(self.class_url(), data, **kwargs)
 
-    def close(self, virtual_account_id, data=None, **kwargs):
-       """"
-       closes a  existing virtual account
-       Args:
-            virtual_account_id: The unique identifier of the Virtual Account which will be closed.
-       Returns:
-           Returns the virtual account object if the virtual account is closed successfully.
-           Else it returns an error response.
-       """
-       if data is None:
-           data = {}
-
-       url = "{0}/cancel".format(self.instance_url(virtual_account_id))
-       return self._patch(url, data, **kwargs)
-
     def retrieve(self, virtual_account_id, **kwargs):
         """"
         Retrieve virtual account for given virtual account id
