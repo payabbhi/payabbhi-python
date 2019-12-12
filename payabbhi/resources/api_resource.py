@@ -10,6 +10,11 @@ try:
 except ImportError:
     import urllib.parse as urlparse
 
+# dict of resource classes which contian underscore
+resource_name_with_underscore_dict =	{
+  "paymentlink": "payment_link",
+  "virtualaccount": "virtual_account",
+}
 
 class APIResource(http_client.HTTPClient):
 
@@ -41,6 +46,8 @@ class APIResource(http_client.HTTPClient):
         class_name = called_class[8:len(called_class)-2]
         splitted_class_name = str(class_name).split(".")
         cls_name = splitted_class_name[len(splitted_class_name)-1].lower()
+        if cls_name in resource_name_with_underscore_dict.keys():
+            cls_name = resource_name_with_underscore_dict[cls_name]
         return "/api/v1/%ss" % (cls_name,)
 
     def instance_url(self, instance_id):
@@ -68,3 +75,6 @@ class APIResource(http_client.HTTPClient):
 
     def _delete(self, _id, **kwargs):
         return self.request('DELETE', self.instance_url(_id), self.client, data=None, **kwargs)
+
+    def _patch(self, _id, **kwargs):
+        return self.request('PATCH', self.instance_url(_id), self.client, data=None, **kwargs)

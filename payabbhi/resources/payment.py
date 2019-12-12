@@ -53,6 +53,21 @@ class Payment(APIResource):
         url = "{0}/refunds".format(self.instance_url(payment_id))
         return self._get(url, data, **kwargs)
 
+    def virtual_account(self, payment_id, data=None, **kwargs):
+        """"
+        Retrieve virtual_account details for given payment Id
+        Args:
+            payment_id: Payment identifier for which virtual_account details has to be retrieved
+        Returns:
+            Returns a payment object, given a valid payment identifier was provided, and returns
+            an error otherwise.
+        """
+        if data is None:
+            data = {}
+
+        url = "{0}/virtual_account".format(self.instance_url(payment_id))
+        return self._get(url, data, **kwargs)
+
     def capture(self, data=None, **kwargs):
         """"
         Captures the Payment object
