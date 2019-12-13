@@ -1,3 +1,4 @@
+from ..error import InvalidRequestError
 from .api_resource import APIResource
 
 
@@ -35,9 +36,9 @@ class Subscription(APIResource):
                 billing_cycle_count: Total no. of billing cycles. This represents how long the subscription will run.
                 customer_id: The unique identifier of the Customer who is subscribing to the plan.
                 customer_notification_by: Indicates who is responsible for notification to the customers for important subscription life cycle events.
-                trial_duration: Duration of the trial period in days
+                trial_end_at: Timestamp at which the trial for the subscription should end. Measured in seconds since the Unix epoch.
                 quantity: The quantity of the plan, which the customer is subscribing to. Ex : 5 users are subscribing to the plan.
-                billing_method: Billing mode of the Subscription. the value can be either recurring or manual.
+                billing_method: Billing mode of the Subscription. the value can be either automatic or manual.
                 due_by_days: No. of days by which the invoices associated with the subscription should be paid starting from the Invoice Issue date. This is applicable only when billing_method is manual.
                 notes: key value pair as notes
                 upfront_items: List of item objects to be included as upfront charges or set up fees of the subscription.
@@ -48,20 +49,21 @@ class Subscription(APIResource):
         return self._post(self.class_url(), data, **kwargs)
 
     def cancel(self, subscription_id, data=None, **kwargs):
-        """"
-        Cancels existing Subscription
-        Args:
-             subscription_id: The identifier of the subscription which needs to be cancelled.
-             data : Dictionary having keys using which subscription has to be cancelled
-                 at_billing_cycle_end: The flag which determines if the Subscription to be cancelled immediately or at the end of the current billing cycle.
-        Returns:
-            Subscription object containing data for cancelled subscription
-        """
-        if data is None:
-            data = {}
+       """"
+       Cancels existing Subscription
+       Args:
+            subscription_id: The identifier of the subscription which needs to be cancelled.
+            data : Dictionary having keys using which subscription has to be cancelled
+                at_billing_cycle_end: The flag which determines if the Subscription to be cancelled immediately or at the end of the current billing cycle.
+       Returns:
+           Subscription object containing data for cancelled subscription
+       """
+       if data is None:
+           data = {}
 
-        url = "{0}/cancel".format(self.instance_url(subscription_id))
-        return self._post(url, data, **kwargs)
+       url = "{0}/cancel".format(self.instance_url(subscription_id))
+       return self._post(url, data, **kwargs)
+
 
     def retrieve(self, subscription_id, **kwargs):
         """"

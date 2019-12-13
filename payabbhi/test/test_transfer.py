@@ -50,10 +50,10 @@ class TestTransfer(unittest2.TestCase):
     @responses.activate
     def test_transfer_create(self):
         result = mock_file('dummy_transfer_collection')
-        url = payabbhi.api_base + '/api/v1/payments/' + self.source_id + '/transfers'
+        url = self.transfer_url
         responses.add(responses.POST, url, status=200,
                       body=result, match_querystring=True)
-        response = self.client.transfer.create(self.source_id, data={'transfers':[{'amount':20,'currency':'INR','recipient_id':'recp_Za30i2k3p6blq3i1'},
-                                                                                  {'amount':30,'currency':'INR','recipient_id':'recp_Y2ojRlJVqRMhB0Ay'}]})
+        response = self.client.transfer.create(data={'transfers':[{'source_id':self.source_id, 'amount':20,'currency':'INR','recipient_id':'recp_Za30i2k3p6blq3i1'},
+                                                                                  {'source_id':self.source_id, 'amount':30,'currency':'INR','recipient_id':'recp_Y2ojRlJVqRMhB0Ay'}]})
         resp = json.loads(result)
         assert_list_of_transfers(self, response, resp)

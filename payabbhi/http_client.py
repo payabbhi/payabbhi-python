@@ -99,7 +99,7 @@ class HTTPClient(object):
             url, body = self.build_post_query(path, **options)
             headers = self.set_headers(client)
             return url, headers, body
-        if method == 'DELETE':
+        if method == 'DELETE' or method == 'PATCH':
             url = payabbhi.api_base + path
             headers = self.set_headers(client)
             return url, headers, None
@@ -164,9 +164,20 @@ class HTTPClient(object):
             'invoiceitem': payabbhi.resources.InvoiceItem,
             'event': payabbhi.resources.Event,
             'transfer': payabbhi.resources.Transfer,
-            'list': payabbhi.resources.List
+            'settlement': payabbhi.resources.Settlement,
+            'beneficiary_account': payabbhi.resources.BeneficiaryAccount,
+            'payment_link': payabbhi.resources.PaymentLink,
+            'virtual_account': payabbhi.resources.VirtualAccount,
+            'list': payabbhi.resources.List,
+            'mandate': payabbhi.resources.EmptyClass,# this EmptyClass is needed so that http_client.py/convert_to_object function
+                                                     # never fails during recursive search
+            'bank_account': payabbhi.resources.EmptyClass,
+            'bank_account_payment': payabbhi.resources.EmptyClass,
+            'upi': payabbhi.resources.EmptyClass,
         }
+
         klass_name = resp.get('object')
+
         if not klass_name:
             return resp
         klass = types.get(klass_name)

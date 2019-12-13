@@ -5,11 +5,16 @@ from .resources import Product
 from .resources import Plan
 from .resources import Customer
 from .resources import Subscription
+from .resources import EmptyClass
 from .resources import Invoice
 from .resources import InvoiceItem
 from .resources import List
 from .resources import Event
 from .resources import Transfer
+from .resources import Settlement
+from .resources import BeneficiaryAccount
+from .resources import PaymentLink
+from .resources import VirtualAccount
 
 from .utility import Utility
 
@@ -34,10 +39,15 @@ __all__ = [
     'Plan',
     'Customer',
     'Subscription',
+    'EmptyClass',
     'Invoice',
     'InvoiceItem',
     'Event',
     'Transfer',
+    'Settlement',
+    'BeneficiaryAccount',
+    'PaymentLink',
+    'VirtualAccount',
     'List',
     'Utility'
 ]

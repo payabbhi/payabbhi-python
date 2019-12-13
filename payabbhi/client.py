@@ -1,18 +1,29 @@
 from types import ModuleType
-
 import requests
 
 from . import resources, utility
 
+# dict of resource classes which contian underscore
+resource_name_with_underscore_dict =	{
+  "payment_link": "PaymentLink",
+  "virtual_account": "VirtualAccount",
+}
 def capitalize_camel_case(string):
-    return "".join(map(str.capitalize, string.split('_')))
+    if string in resource_name_with_underscore_dict.keys():
+        return  resource_name_with_underscore_dict[string]
+    else:
+        return "".join(map(str.capitalize, string.split('_')))
 
 # Create a dict of resource classes
 RESOURCE_CLASSES = {}
 
 for resource_name, resource_module in resources.__dict__.items():
     if isinstance(resource_module, ModuleType) and capitalize_camel_case(resource_name) in resource_module.__dict__:
-        RESOURCE_CLASSES[resource_name.replace("_","")] = resource_module.__dict__[capitalize_camel_case(resource_name)]
+        # this is required for classes containing underscore in the name
+        if resource_name in resource_name_with_underscore_dict.keys():
+            RESOURCE_CLASSES[resource_name] = resource_module.__dict__[capitalize_camel_case(resource_name)]
+        else:
+            RESOURCE_CLASSES[resource_name.replace("_","")] = resource_module.__dict__[capitalize_camel_case(resource_name)]
 
 UTILITY_CLASSES = {}
 for utility_name, utility_module in utility.__dict__.items():
@@ -22,7 +33,7 @@ for utility_name, utility_module in utility.__dict__.items():
 
 class Client(object):
 
-    VERSION = '1.0.3'
+    VERSION = '1.0.4'
 
     def __init__(self, access_id="", secret_key=""):
         self.session = requests.Session()

@@ -4,7 +4,7 @@ import responses
 import payabbhi
 
 import unittest2
-from .helpers import mock_file, assert_payment, assert_list_of_refunds, assert_refund, assert_list_of_payments, assert_list_of_transfers
+from .helpers import mock_file, assert_payment, assert_list_of_refunds, assert_refund, assert_list_of_payments, assert_list_of_transfers, assert_payment_virtual_account
 
 class TestPayment(unittest2.TestCase):
 
@@ -67,6 +67,16 @@ class TestPayment(unittest2.TestCase):
         assert_list_of_refunds(self, response, resp)
 
     @responses.activate
+    def test_payment_retrieve_virtual_account(self):
+        result = mock_file('dummy_payment_virtual_account')
+        url = '{0}/{1}/virtual_account'.format(self.payment_url, self.payment_id)
+        responses.add(responses.GET, url, status=200,
+                      body=result, match_querystring=True)
+        response = self.client.payment.virtual_account(self.payment_id)
+        resp = json.loads(result)
+        assert_payment_virtual_account(self, response, resp)
+
+    @responses.activate
     def test_payment_capture(self):
         result = mock_file('dummy_payment_capture')
         url = '{0}/{1}/capture'.format(self.payment_url, self.payment_id)
@@ -107,6 +117,23 @@ class TestPayment(unittest2.TestCase):
         payment_response = self.client.payment.retrieve(self.payment_id)
         payment_resp = json.loads(payment_result)
         assert_payment(self, payment_response, payment_resp)
+
+    @responses.activate
+    def test_payment_transfer(self):
+        result = mock_file('dummy_payment')
+        url = '{0}/{1}'.format(self.payment_url, self.payment_id)
+        responses.add(responses.GET, url, status=200,
+                      body=result, match_querystring=True)
+        payment = self.client.payment.retrieve(self.payment_id)
+
+        transfer_result = mock_file('dummy_transfer_collection')
+        transfer_url = '{0}/{1}/transfers'.format(self.payment_url, payment.id)
+        responses.add(responses.POST, transfer_url, status=200,
+                      body=transfer_result, match_querystring=True)
+        response = payment.transfer(data={'transfers':[{'amount':20,'currency':'INR','recipient_id':'recp_Za30i2k3p6blq3i1'},
+                                                                                  {'amount':30,'currency':'INR','recipient_id':'recp_Y2ojRlJVqRMhB0Ay'}]})
+        resp = json.loads(transfer_result)
+        assert_list_of_transfers(self, response, resp)
 
     @responses.activate
     def test_empty_payment_refund(self):
