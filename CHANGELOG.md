@@ -2,6 +2,10 @@
 
 Changelog for payabbhi-python.
 
+## [1.0.4] - 2019-12-13
+### Added
+- Support for Billing, Settlement and Collect APIs, code compatible with Python 3
+
 ## [1.0.3] - 2019-03-29
 ### Added
 - Support for Billing, Event and Outflow APIs

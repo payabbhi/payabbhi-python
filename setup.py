@@ -5,7 +5,7 @@ with open('LONG_DESCRIPTION.rst') as f:
 
 setup(
     name="payabbhi",
-    version="1.0.3",
+    version="1.0.4",
     description="Payabbhi Python package provides client library for Payabbhi API's",
     long_description=long_description,
     url="https://github.com/payabbhi/payabbhi-python",
