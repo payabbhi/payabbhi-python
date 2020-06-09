@@ -255,6 +255,37 @@ def assert_payment_link(self, actual, expected):
     self.assertEqual(actual.url, expected.get('url'))
     self.assertEqual(actual.created_at, expected.get('created_at'))
 
+def assert_payout(self, actual, expected):
+    self.assertEqual(isinstance(actual, payabbhi.resources.Payout), True)
+    self.assertEqual(actual.id, expected.get('id'))
+    self.assertEqual(actual.object, expected.get('object'))
+    self.assertEqual(actual.remittance_account_no, expected.get('remittance_account_no'))
+    self.assertEqual(actual.amount, expected.get('amount'))
+    self.assertEqual(actual.currency, expected.get('currency'))
+    self.assertEqual(actual.beneficiary_id, expected.get('beneficiary_id'))
+    self.assertEqual(actual.beneficiary_account_no, expected.get('beneficiary_account_no'))
+    self.assertEqual(actual.beneficiary_ifsc, expected.get('beneficiary_ifsc'))
+    self.assertEqual(actual.beneficiary_name, expected.get('beneficiary_name'))
+    self.assertEqual(actual.method, expected.get('method'))
+    self.assertEqual(actual.instrument, expected.get('instrument'))
+    self.assertEqual(actual.purpose, expected.get('purpose'))
+    self.assertEqual(actual.merchant_reference_id, expected.get('merchant_reference_id'))
+    self.assertEqual(actual.status, expected.get('status'))
+    self.assertEqual(actual.utr, expected.get('utr'))
+    self.assertEqual(actual.created_at, expected.get('created_at'))
+
+
+def assert_remittance_account(self, actual, expected):
+    self.assertEqual(isinstance(actual, payabbhi.resources.RemittanceAccount), True)
+    self.assertEqual(actual.id, expected.get('id'))
+    self.assertEqual(actual.object, expected.get('object'))
+    self.assertEqual(actual.balance_amount, expected.get('balance_amount'))
+    self.assertEqual(actual.currency, expected.get('currency'))
+    self.assertEqual(actual.account_type, expected.get('account_type'))
+    self.assertEqual(actual.ifsc, expected.get('ifsc'))
+    self.assertEqual(actual.beneficiary_name, expected.get('beneficiary_name'))
+    self.assertEqual(actual.low_balance_alert, expected.get('low_balance_alert'))
+
 def assert_collection_method(self, actual, expected):
     self.assertEqual(actual.id, expected.get('id'))
     self.assertEqual(actual.object, expected.get('object'))
@@ -430,3 +461,10 @@ def assert_list_of_virtual_accounts(self, actual, expected):
     self.assertEqual(actual.object, expected.get('object'))
     for (virtual_account_actual, virtual_account_expected) in zip(actual.data, expected.get('data')):
         assert_virtual_account(self, virtual_account_actual, virtual_account_expected)
+
+def assert_list_of_payouts(self, actual, expected):
+    self.assertEqual(isinstance(actual, payabbhi.resources.List), True)
+    self.assertEqual(actual.total_count, expected.get('total_count'))
+    self.assertEqual(actual.object, expected.get('object'))
+    for (payout_actual, payout_expected) in zip(actual.data, expected.get('data')):
+        assert_payout(self, payout_actual, payout_expected)

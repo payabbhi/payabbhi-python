@@ -14,6 +14,8 @@ from .settlement  import Settlement
 from .beneficiary_account  import BeneficiaryAccount
 from .payment_link   import PaymentLink
 from .virtual_account   import VirtualAccount
+from .payout import Payout
+from .remittance_account   import RemittanceAccount
 from .list  import List
 from .api_resource import APIResource
 
@@ -35,5 +37,7 @@ __all__ = [
     'Settlement',
     'PaymentLink',
     'VirtualAccount',
+    'Payout',
+    'RemittanceAccount'
     'EmptyClass',
 ]
