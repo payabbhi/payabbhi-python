@@ -2,6 +2,10 @@
 
 Changelog for payabbhi-python.
 
+## [1.0.5] - 2020-06-10
+### Added
+- Support for Payout and Remittance Account APIs
+
 ## [1.0.4] - 2019-12-13
 ### Added
 - Support for Billing, Settlement and Inflow APIs
