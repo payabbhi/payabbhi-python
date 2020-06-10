@@ -14,6 +14,7 @@ except ImportError:
 resource_name_with_underscore_dict =	{
   "paymentlink": "payment_link",
   "virtualaccount": "virtual_account",
+  "remittanceaccount": "remittance_account",
 }
 
 class APIResource(http_client.HTTPClient):

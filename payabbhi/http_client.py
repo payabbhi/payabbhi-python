@@ -168,6 +168,8 @@ class HTTPClient(object):
             'beneficiary_account': payabbhi.resources.BeneficiaryAccount,
             'payment_link': payabbhi.resources.PaymentLink,
             'virtual_account': payabbhi.resources.VirtualAccount,
+            'payout': payabbhi.resources.Payout,
+            'remittance_account': payabbhi.resources.RemittanceAccount,
             'list': payabbhi.resources.List,
             'mandate': payabbhi.resources.EmptyClass,# this EmptyClass is needed so that http_client.py/convert_to_object function
                                                      # never fails during recursive search

@@ -15,6 +15,8 @@ from .resources import Settlement
 from .resources import BeneficiaryAccount
 from .resources import PaymentLink
 from .resources import VirtualAccount
+from .resources import Payout
+from .resources import RemittanceAccount
 
 from .utility import Utility
 
@@ -48,6 +50,8 @@ __all__ = [
     'BeneficiaryAccount',
     'PaymentLink',
     'VirtualAccount',
+    'Payout',
+    'RemittanceAccount',
     'List',
     'Utility'
 ]
